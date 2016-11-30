@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<!-- square object with list of points -->
+	<bean id="square" class="com.michalak.SpringAnnotations.Square">
+		<property name="pointsList">
+			<list>
+				<ref bean="Point" />
+				<ref bean="Point" />
+				<ref bean="Point" />
+				<ref bean="Point" />
+			</list>
+		</property>
+	</bean>
+
+
+
+
+
+
+
+
+	<!--point object created by setPoint SQUARE method() 
+		@Resource(name="pointJSR250") 
+		name="pointJSR250" 
+		<context:annotation-config all of("javax.) 		
+		OR 
+		@Autowired @Qualifier("squarePoint")
+		<qualifier value="squarePoint"></qualifier> 
+		<context:annotation-config /> -->
+	<bean id="Point" class="com.michalak.SpringCore.Point" name="pointJSR250">
+		<qualifier value="squarePoint"></qualifier>
+	</bean>
+
+	
+
+
+
+
+	<!--@Required @Autowire+@Qualifier("squarePoint")  -->
+	<context:annotation-config /> <!--instead ALL above org.springframework.beans.factory.annotation Like  --> 
+	<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"> </bean> -->
+
+
+
+
+
+	<!-- LINE OBJECT ADDED WITH USE OF @Component  org.springframework.stereotype -->
+
+	<!-- Scan code for annotations @Component in base-package -->
+	<context:component-scan base-package="com.michalak.SpringAnnotations" />
+
+	 
+	
+	<bean id="messageSource"  class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames"  >
+			<list>							<!-- List of all .properties files for use-->
+				<value>mymessages</value> 
+			</list>
+		</property>
+	</bean>
+	
+	
+
+
+</beans>

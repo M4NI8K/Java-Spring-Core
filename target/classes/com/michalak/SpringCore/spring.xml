@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+
+	<bean id="Point1" class="com.michalak.SpringCore.Point">
+	<property name="x" value="32"></property>	
+	<property name="y" value="53"></property>							
+	</bean>
+
+	<bean id="Point2" class="com.michalak.SpringCore.Point">
+	<property name="x" value="99"></property>	
+	<property name="y" value="99"></property>							
+	</bean>
+	
+	
+	<bean id="triangle" class="com.michalak.SpringCore.Triangle" scope="singleton">
+	 
+	<!-- CONSTRUCTOR type injection	
+		<constructor-arg type="int" value="20"> </constructor-arg> 
+		<constructor-arg type="java.lang.String" value="20"> </constructor-arg> -->
+		
+	<!-- CONSTRUCTOR index injection 	
+		<constructor-arg index="0" value="20"></constructor-arg>
+		<constructor-arg index="1" value="hihi"></constructor-arg>-->
+	
+	<!-- Reference to bean -->
+	<property name="pointA" ref="Point1"></property>			
+				
+	<!-- Inner Bean -->	
+	<property name="pointB"> 									
+		<bean class="com.michalak.SpringCore.Point"> 
+			<property name="x" value="32"></property>	
+			<property name="y" value="53"></property>
+		</bean>
+	</property>
+		
+	<!-- LIST INITIALIZATION		 -->
+	<property name="pointList">
+		<list>
+			 <ref bean="Point2"/>
+			 <ref bean="Point2"/>
+		</list>
+	</property>	
+	</bean>
+
+	<alias name="triangle" alias="triangleShape" />
+
+
+
+</beans>

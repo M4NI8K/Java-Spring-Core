@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+    "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+    
+    
+    
+<beans  default-init-method="initializingMethod"  default-destroy-method="destroyMethod"> <!-- Setting up deufalt initialization and cleanap methods -->
+
+
+	
+	<bean id="circle" class="com.michalak.SpringScopeLifecycle.Circle" scope="singleton" abstract="true" >  <!--Prototype getBean -->
+		<property name="radius"  ref="radius1"></property>
+	</bean>
+
+	<bean id="circle1" parent="circle"   init-method="initializingMethod"  destroy-method="destroyMethod"> 		
+<!--  merge="true" merges parent and child list
+		<property name="">
+			<list merge="true">
+				<ref  bean=""/>
+				<ref  bean=""/>
+				<ref   />
+			</list>
+		</property> 
+		
+-->	
+	</bean>
+
+
+
+	<bean id="radius1"  class="com.michalak.SpringScopeLifecycle.Radius" >
+		<property name="lenght" value="44"></property>
+		<property name="size" value="${radius.sizeBig}"></property>
+	</bean>
+
+	<bean class="com.michalak.SpringScopeLifecycle.DisplayNameBeanPostProcessor">	
+	</bean>
+
+	<bean class="com.michalak.SpringScopeLifecycle.MyBeanFactoryPP"></bean>
+	
+	<bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"><!-- PropertyPlaceholderConfigurer sizeconfig.properties include -->
+		<property name="locations" value="classpath:/com/michalak/SpringScopeLifecycle/sizeconfig.properties"> <!-- classpath:/ if diffrent directory -->
+		
+		</property>
+	</bean>
+
+</beans>
